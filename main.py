@@ -8,10 +8,14 @@ from datetime import datetime
 # ========== 1. Чтение конфигурации ==========
 import os
 import sys
+import configparser
 
+# Определяем путь к config.ini
 if getattr(sys, 'frozen', False):
-    base_dir = os.path.dirname(sys.executable)
+    # Программа запущена как EXE (собранный PyInstaller)
+    base_dir = sys._MEIPASS
 else:
+    # Обычный запуск Python-скрипта
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
 config_path = os.path.join(base_dir, 'config.ini')
