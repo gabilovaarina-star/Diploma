@@ -1,4 +1,4 @@
-name: Build for Linux
+name: Build for Windows
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  build-windows:
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -18,10 +18,10 @@ jobs:
       run: pip install -r requirements.txt
     - name: Install PyInstaller
       run: pip install pyinstaller
-    - name: Build binary for Linux
-      run: pyinstaller --onefile --noconsole --add-data "config.ini:." main.py
-    - name: Upload artifact (Linux)
+    - name: Build EXE with config inside
+      run: pyinstaller --onefile --noconsole --add-data "config.ini;." main.py
+    - name: Upload artifact (Windows)
       uses: actions/upload-artifact@v4
       with:
-        name: diploma-system-linux
-        path: dist/main
+        name: diploma-system-windows
+        path: dist/main.exe
